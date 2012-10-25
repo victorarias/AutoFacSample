@@ -21,11 +21,12 @@ namespace ConsoleApplication3
 
             //new PrimeiroDebito().Execute();
 
-            var primeiroDebito = container.Resolve<PrimeiroDebito>();
-            primeiroDebito.Execute();
-            
-            //var segundoDebito = new PrimeiroDebito(msg => new Historico(msg, new SalvadorDeHistoricoStubado()));
-            //segundoDebito.Execute();
+            //var primeiroDebito = container.Resolve<PrimeiroDebito>();
+            //primeiroDebito.Execute();
+
+            Func<string, Historico> factory = (msg) => new Historico(msg, new SalvadorDeHistoricoStubado());
+            var segundoDebito = new PrimeiroDebito(factory);
+            segundoDebito.Execute();
         }
     }
 
