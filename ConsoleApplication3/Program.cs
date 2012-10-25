@@ -19,10 +19,10 @@ namespace ConsoleApplication3
 
             var container = builder.Build();
 
-            new PrimeiroDebito().Execute();
+            //new PrimeiroDebito().Execute();
 
-            //var primeiroDebito = container.Resolve<PrimeiroDebito>();
-            //primeiroDebito.Execute();
+            var primeiroDebito = container.Resolve<PrimeiroDebito>();
+            primeiroDebito.Execute();
             
             //var segundoDebito = new PrimeiroDebito(msg => new Historico(msg, new SalvadorDeHistoricoStubado()));
             //segundoDebito.Execute();
@@ -32,15 +32,15 @@ namespace ConsoleApplication3
 
     class PrimeiroDebito {
         private Func<string, Historico> historico;
-        public PrimeiroDebito(/*Func<string, Historico> historico*/)
+        public PrimeiroDebito(Func<string, Historico> historico)
         {
-            //this.historico = historico;
+            this.historico = historico;
         }
 
         public void Execute()
         {
-            new Historico("Salva isso!");
-            //historico("Salva isso!");
+            //new Historico("Salva isso!");
+            historico("Salva isso!");
         }
     }
 
